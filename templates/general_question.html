@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}General Questions - TeacherGPT{% endblock %}
+
+{% block content %}
+<div class="question-form">
+    <h2>Ask a General Question</h2>
+    
+    <div class="examples-section">
+        <h3>Example Questions:</h3>
+        <div class="examples-grid">
+            <div class="example-card" onclick="fillExample('Explain quantum computing in simple terms')">
+                Explain quantum computing in simple terms
+            </div>
+            <div class="example-card" onclick="fillExample('What\'s the difference between TCP and UDP?')">
+                What's the difference between TCP and UDP?
+            </div>
+            <div class="example-card" onclick="fillExample('Summarize the French Revolution in 3 bullet points')">
+                Summarize the French Revolution in 3 bullet points
+            </div>
+            <div class="example-card" onclick="fillExample('Create a quiz about machine learning fundamentals')">
+                Create a quiz about machine learning fundamentals
+            </div>
+            <div class="example-card" onclick="fillExample('Make flashcards for Spanish vocabulary about food')">
+                Make flashcards for Spanish vocabulary about food
+            </div>
+        </div>
+    </div>
+    
+    <form method="POST" action="/general_question" onsubmit="showLoading()">
+        <div class="form-group">
+            <label for="question">Your Question/Topic:</label>
+            <textarea id="question" name="question" rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="material_type">Format as:</label>
+            <select id="material_type" name="material_type">
+                {% for type in material_types %}
+                <option value="{{ type }}">{{ type|title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Source:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="source" value="topic" checked> 
+                    Generate from topic
+                </label>
+                <label>
+                    <input type="radio" name="source" value="notes"> 
+                    Generate from my notes
+                </label>
+            </div>
+        </div>
+        
+        <button type="submit" id="submit-btn">Generate</button>
+        <div id="loading" class="loading-indicator" style="display:none;">
+            <div class="spinner"></div>
+            <p>Generating... This may take a few seconds</p>
+        </div>
+    </form>
+</div>
+
+{% if results %}
+<div class="results-section">
+    <h3>Results:</h3>
+    <div class="results-container">
+        {% for result in results %}
+        <div class="result-item">
+            <div class="result-question" onclick="toggleAnswer(this)">
+                {{ result.question }}
+            </div>
+            <div class="result-answer" style="display:none;">
+                {{ result.answer }}
+                <button class="clear-btn" onclick="clearResult(this)">Clear</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<script>
+function fillExample(example) {
+    const questionInput = document.getElementById('question');
+    questionInput.value = example;
+    questionInput.focus();
+    
+    // Scroll to the input smoothly
+    questionInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Highlight the input briefly
+    questionInput.style.transition = 'box-shadow 0.3s ease';
+    questionInput.style.boxShadow = '0 0 0 2px var(--primary)';
+    
+    setTimeout(() => {
+        questionInput.style.boxShadow = 'none';
+    }, 1000);
+}
+
+function showLoading() {
+    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('loading').style.display = 'block';
+}
+
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+}
+
+function clearResult(element) {
+    const resultItem = element.closest('.result-item');
+    resultItem.remove();
+    
+    // If no results left, hide the results section
+    if (!document.querySelector('.result-item')) {
+        document.querySelector('.results-section').style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

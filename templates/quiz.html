@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Quiz Time!</h2>
+    
+    <form action="/submit_quiz" method="POST">
+        {% for flashcard in flashcards %}
+        <div class="quiz-question">
+            <p>{{ flashcard.term }}</p>
+            <input type="text" name="answer_{{ flashcard.id }}" required>
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="submit-button">Submit Quiz</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+2025-05-03 12:48:55,482 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:48:56,239 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:48:56,471 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:48:56,868 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:49:28,516 ERROR: Index route error: (sqlite3.OperationalError) no such column: questions.source
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT questions.id AS questions_id, questions.question_text AS questions_question_text, questions.answer_text AS questions_answer_text, questions.date_asked AS questions_date_asked, questions.material_type AS questions_material_type, questions.source AS questions_source, questions.subject_id AS questions_subject_id 
+FROM questions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8) [in C:\Users\Dell\Desktop\teachergpt\app.py:192]
+Traceback (most recent call last):
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: questions.source
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Dell\Desktop\teachergpt\app.py", line 181, in index
+    'questions': Question.query.count(),
+                 ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\query.py", line 3147, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\query.py", line 2836, in scalar
+    ret = self.one()
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\query.py", line 2809, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+        params,
+        ^^^^^^^
+        execution_options={"_sa_orm_load_options": self.load_options},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Python313\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: questions.source
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT questions.id AS questions_id, questions.question_text AS questions_question_text, questions.answer_text AS questions_answer_text, questions.date_asked AS questions_date_asked, questions.material_type AS questions_material_type, questions.source AS questions_source, questions.subject_id AS questions_subject_id 
+FROM questions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-05-03 12:49:43,714 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:49:46,721 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:49:48,128 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:51:19,196 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:51:21,115 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]
+2025-05-03 12:51:22,327 INFO: TeacherGPT startup [in C:\Users\Dell\Desktop\teachergpt\app.py:174]

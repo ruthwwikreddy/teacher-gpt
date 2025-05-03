@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Flashcards</h2>
+    
+    {% if flashcards %}
+    <div class="flashcards-list">
+        {% for flashcard in flashcards %}
+        <div class="flashcard">
+            <div class="term">{{ flashcard.term }}</div>
+            <div class="definition">{{ flashcard.definition }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No flashcards yet. Ask some questions to generate flashcards!</p>
+    {% endif %}
+    
+    <a href="/general_question" class="button">Create More</a>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Quiz Results</h2>
+    
+    <div class="results">
+        <p>You scored {{ correct }} out of {{ total }} ({{ percentage }}%)</p>
+        
+        {% if percentage >= 80 %}
+        <p class="success">Excellent work!</p>
+        {% elif percentage >= 60 %}
+        <p class="warning">Good effort!</p>
+        {% else %}
+        <p class="error">Keep practicing!</p>
+        {% endif %}
+    </div>
+    
+    <a href="/quiz" class="button">Try Again</a>
+    <a href="/flashcards" class="button">Review Flashcards</a>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Generated {{ material.type|title }}</h2>
+    
+    <div class="generation-info">
+        <p>Generated in {{ material.generation_time }} seconds</p>
+    </div>
+    
+    <div class="material-content">
+        <div class="question-box">
+            <h3>Your Question:</h3>
+            <p>{{ material.question }}</p>
+        </div>
+        
+        <div class="answer-box">
+            <h3>{{ material.type|title }} Content:</h3>
+            <div class="content-display">
+                {{ material.content|replace('\n', '<br>')|safe }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <button onclick="saveMaterial()" class="save-btn">
+            <i class="save-icon"></i> Save to Library
+        </button>
+        <a href="/general_question" class="button">Ask Another</a>
+    </div>
+</div>
+
+<script>
+function saveMaterial() {
+    // TODO: Implement save functionality
+    alert('Material saved!');
+}
+</script>
+{% endblock %}
